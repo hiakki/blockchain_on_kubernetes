@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eth-netstats
+  labels:
+    app: eth-netstats
+spec:
+  selector:
+    matchLabels:
+      app: eth-netstats
+  template:
+    metadata:
+      labels:
+        app: eth-netstats
+    spec:
+      containers:
+      - name: eth-netstats
+        image: hiakki/eth-netstats
+#        volumeMounts:
+#        - name: config
+#          mountPath: /etc/nginx/conf.d/
+#        - name: logs
+#          mountPath: /var/log/nginx/
+#        - name: data
+#          mountPath: /usr/app/
+        resources:
+          requests:
+            cpu: 100m
+#      volumes:
+#      - name: logs
+#        hostPath:
+#          path: /home/kube/tricksvibe/nginx/logs/
+#      - name: data
+#        hostPath:
+#          path: /home/kube/app/tricksvibe/
+#      - name: config
+#        configMap:
+#          name: my-nginx
+#          items:
+#          - key: config
+#            path: site.conf
+#      - name: data
+#        persistentVolumeClaim:
+#          claimName: my-app
+#      - name: data
+#        awsElasticBlockStore:
+#          volumeID: vol-022dd5f42aeee337b
+#          fsType: ext4

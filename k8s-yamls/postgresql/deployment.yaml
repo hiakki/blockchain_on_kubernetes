@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql
+  labels:
+    app: postgresql
+spec:
+  selector:
+    matchLabels:
+      app: postgresql
+  template:
+    metadata:
+      labels:
+        app: postgresql
+    spec:
+      containers:
+      - name: postgresql
+        image: bitnami/postgresql
+        env:
+        - name: POSTGRESQL_USERNAME
+          value: "postgres"
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+#        volumeMounts:
+#        - name: config
+#          mountPath: /etc/nginx/conf.d/
+#        - name: logs
+#          mountPath: /var/log/nginx/
+#        - name: data
+#          mountPath: /usr/app/
+        resources:
+          requests:
+            cpu: 100m
+#      volumes:
+#      - name: logs
+#        hostPath:
+#          path: /home/kube/tricksvibe/nginx/logs/
+#      - name: data
+#        hostPath:
+#          path: /home/kube/app/tricksvibe/
+#      - name: config
+#        configMap:
+#          name: my-nginx
+#          items:
+#          - key: config
+#            path: site.conf
+#      - name: data
+#        persistentVolumeClaim:
+#          claimName: my-app
+#      - name: data
+#        awsElasticBlockStore:
+#          volumeID: vol-022dd5f42aeee337b
+#          fsType: ext4

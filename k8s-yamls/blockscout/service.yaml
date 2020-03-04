@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service              
+metadata:
+  name: blockscout
+
+spec:
+  type: LoadBalancer
+#  externalIPs:
+#  - 10.7.7.203
+  ports:
+  - port: 4000
+    protocol: TCP
+    targetPort: 4000
+    nodePort: 30422
+  selector:
+    app: blockscout
